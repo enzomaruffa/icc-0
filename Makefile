@@ -1,7 +1,7 @@
     CC     = gcc -g
 
-    CFLAGS = -std=c11
-    LFLAGS = -lm
+    CFLAGS = -std=c11 -fPIC
+    LFLAGS = -lm -fPIC
 
       PROG = labZero
       OBJS = utils.o \
@@ -12,7 +12,7 @@
 %.o: %.c %.h utils.h
 	$(CC) -c $(CFLAGS) $<
 
-$(PROG):  $(OBJS) $(PROG).o
+$(PROG):  $(OBJS) $(PROG).o 
 	$(CC) -o $@ $^ $(LFLAGS)
 
 limpa:
