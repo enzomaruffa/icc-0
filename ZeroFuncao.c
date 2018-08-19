@@ -101,12 +101,24 @@ double secante (Polinomio p, double x0, double x1, double eps,
     return 0;
 }
 
-
 void calcPolinomio_rapido(Polinomio p, double x, double *px, double *dpx)
 {
-    
-}
+    *px = 0;
+    *dpx = 0;
+    double x_mult = 1;
 
+    /* Primeira iteração exclusiva do px onde x tem grau 0. Na derivada esse termo não existe */
+    *px += p.p[0] /* * x_mult */ ;
+
+    /* A partir do grau 1, os termos são "iguais". O que muda é que na mesma iteração, px deve ser calculado normalmente enquando dpx deve ter o x elevado até 1 grau a menos e o grau da iteração atual deve multiplicar o coeficiente */
+    for (int i = 1; i <= p.grau; i++) {
+        *dpx += x_mult * (p.p[i]*i));
+
+        x_mult *= x;
+
+        *px += x_mult * p.p[i]);
+    }
+}
 
 void calcPolinomio_lento(Polinomio p, double x, double *px, double *dpx)
 {
